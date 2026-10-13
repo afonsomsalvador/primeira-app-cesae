@@ -1,6 +1,11 @@
 import { Button, TouchableOpacity, Text } from "react-native";
 
-const AppButton = () => {
+type AppButtonProps = {
+  title: string;
+  onPress: () => void;
+}
+
+const AppButton = ({ title, onPress }: AppButtonProps) => {
   return (
     <>
       {/* Button nativo com diferenças visuais entre Android e iOS */}
@@ -13,12 +18,10 @@ const AppButton = () => {
           padding: 10,
           borderRadius: 8,
         }}
-        onPress={() => {
-          console.log("Button pressed");
-        }}
+        onPress={onPress}
       >
         <Text style={{ fontSize: 16, fontFamily: "Arial", fontWeight: "bold" }}>
-          Click Me
+          {title}
         </Text>
       </TouchableOpacity>
     </>
