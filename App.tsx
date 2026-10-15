@@ -8,10 +8,12 @@ import {
   Alert,
   TextInput,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import Header from "./src/components/Header/header";
 import AppButton from "./src/components/AppButton/appButton";
 import { useState } from "react";
+import Card from "./src/components/Card/card";
 
 type Tarefa = {
   id: string;
@@ -37,14 +39,28 @@ const data = [
   },
 ] as Array<Tarefa>; // Tarefa[]
 
+type Filtro = "todas" | "concluidas" | "pendentes";
+
 export default function App() {
   const nome = "Afonso";
   // const [contador, setContador] = useState<number>(0 as number);
   const [contador, setContador] = useState(0);
   const [novaTarefa, setNovaTarefa] = useState("");
   const [tarefas, setTarefas] = useState(data as Tarefa[]); // Array<Tarefa>
+  const [filtro, setFiltro] = useState("todas" as Filtro);
 
   console.log("Contador: ", contador);
+
+  const tarefasVisiveis = () => {
+    if (filtro === "pendentes") {
+      return tarefas.filter((task) => !task.concluida);
+    }
+    if (filtro === "concluidas") {
+      return tarefas.filter((task) => task.concluida);
+    }
+    return tarefas;
+  };
+
   return (
     <View style={styles.mainContainer}>
       {/* <ScrollView contentContainerStyle={{ alignItems: "center" }} showsVerticalScrollIndicator={false}> */}
@@ -111,14 +127,67 @@ export default function App() {
         <Text>{contador}</Text>
         <AppButton title="Click Me" onPress={() => setContador(contador + 1)} />
       </View>
+      <View
+        style={{
+          marginVertical: 10,
+          flexDirection: "row",
+          gap: 8,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => setFiltro("todas")}
+          style={{
+            backgroundColor: "#fff",
+            padding: 10,
+            borderRadius: 8,
+          }}
+        >
+          <Text>Ver todas</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setFiltro("concluidas")}
+          style={{
+            backgroundColor: "#fff",
+            padding: 10,
+            borderRadius: 8,
+          }}
+        >
+          <Text>Concluidas</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setFiltro("pendentes")}
+          style={{
+            backgroundColor: "#fff",
+            padding: 10,
+            borderRadius: 8,
+          }}
+        >
+          <Text>Pendentes</Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
-        data={tarefas}
+        data={tarefasVisiveis()}
         keyExtractor={(tarefa) => tarefa.id}
         renderItem={({ item: tarefa }) => {
-          return <Text>{tarefa.titulo}</Text>;
+          return (
+            <Card
+              titulo={tarefa.titulo}
+              concluida={tarefa.concluida}
+              id={tarefa.id}
+              onDelete={() => {
+                setTarefas(tarefas.filter((t) => t.id !== tarefa.id));
+              }}
+              onToggle={() => {
+                setTarefas(
+                  tarefas.map((t) =>
+                    tarefa.id === t.id ? { ...t, concluida: !t.concluida } : t,
+                  ),
+                );
+              }}
+            />
+          );
         }}
       />
-      {/* </ScrollView> */}
     </View>
   );
 }
