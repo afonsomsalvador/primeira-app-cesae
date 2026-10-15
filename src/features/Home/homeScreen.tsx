@@ -3,8 +3,12 @@ import { StatusBar } from "expo-status-bar";
 import Header from "../../components/Header/header";
 import AppButton from "../../components/AppButton/appButton";
 import { useState } from "react";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigation/types";
 
-const HomeScreen = () => {
+type NavigationProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+const HomeScreen = ({navigation, route}: NavigationProps) => {
   const nome = "Afonso";
   // const [contador, setContador] = useState<number>(0 as number);
   const [contador, setContador] = useState(0);
@@ -42,10 +46,10 @@ const HomeScreen = () => {
       />
       <Text>{contador}</Text>
       <AppButton title="Click Me" onPress={() => setContador(contador + 1)} />
+        <AppButton title="Ir para tarefas" onPress={() => navigation.navigate('Tarefas')} />
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -55,4 +59,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
 export default HomeScreen;

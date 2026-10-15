@@ -1,8 +1,19 @@
-import { View, TextInput, TouchableOpacity, Text, FlatList } from "react-native";
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  StyleSheet,
+  Image,
+} from "react-native";
 import { useState } from "react";
 import Header from "../../components/Header/header";
 import AppButton from "../../components/AppButton/appButton";
 import Card from "../../components/Card/card";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigation/types";
+import { StatusBar } from "expo-status-bar";
 
 type Tarefa = {
   id: string;
@@ -30,7 +41,9 @@ const data = [
 
 type Filtro = "todas" | "concluidas" | "pendentes";
 
-const TarefasScreen = () => {
+type NavigationProps = NativeStackScreenProps<RootStackParamList, "Tarefas">;
+
+const TarefasScreen = ({ navigation, route }: NavigationProps) => {
   const [novaTarefa, setNovaTarefa] = useState("");
   const [tarefas, setTarefas] = useState(data as Tarefa[]); // Array<Tarefa>
   const [filtro, setFiltro] = useState("todas" as Filtro);
@@ -46,9 +59,19 @@ const TarefasScreen = () => {
   };
 
   return (
-    <View>
+    <View style={styles.mainContainer}>
       {/* <ScrollView contentContainerStyle={{ alignItems: "center" }} showsVerticalScrollIndicator={false}> */}
-      <Header titulo="Header Home" subtitulo="Bem-vindo ao aplicativo" />
+      <View
+        style={{ flexDirection: "row", alignItems: "center", marginTop: 30 }}
+      >
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image
+            style={{ width: 40, height: 40 }}
+            source={require("../../../assets/arrow-right.png")}
+          />
+        </TouchableOpacity>
+        <Header titulo="Tarefas" subtitulo="Lista de tarefas" />
+      </View>
       <View style={{ alignItems: "center" }}>
         <View
           style={{
@@ -143,5 +166,13 @@ const TarefasScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    backgroundColor: "#45c7cc",
+  },
+});
 
 export default TarefasScreen;
