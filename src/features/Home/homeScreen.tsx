@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Header from "../../components/Header/header";
 import AppButton from "../../components/AppButton/appButton";
@@ -10,7 +10,7 @@ const HomeScreen = () => {
   const [contador, setContador] = useState(0);
 
   return (
-    <View>
+    <View style={styles.mainContainer}>
       <Header titulo="Home" subtitulo="Bem-vindo ao aplicativo" />
       <Text style={{ color: "white", fontSize: 30 }}>
         Olá, <Text style={{ fontWeight: "bold" }}>{nome}</Text>!
@@ -38,7 +38,7 @@ const HomeScreen = () => {
       <Image
         resizeMode="repeat"
         style={{ width: 50, height: 150 }}
-        source={require("./assets/icon.png")}
+        source={require("../../../assets/icon.png")}
       />
       <Text>{contador}</Text>
       <AppButton title="Click Me" onPress={() => setContador(contador + 1)} />
@@ -46,4 +46,13 @@ const HomeScreen = () => {
   );
 };
 
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: "#45c7cc",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 export default HomeScreen;
