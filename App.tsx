@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "./src/navigation/types";
 import HomeScreen from "./src/features/Home/homeScreen";
 import TarefasScreen from "./src/features/Tarefas/tarefasScreen";
+import DetalheScreen from "./src/features/Detalhes/detalheScreen";
 import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -12,6 +13,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
         <Stack.Screen name="Tarefas" component={TarefasScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Detalhes" component={DetalheScreen} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

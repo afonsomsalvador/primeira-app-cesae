@@ -4,4 +4,5 @@ export type CardProps = {
     concluida: boolean;
     onToggle: () => void;
     onDelete: () => void;
+    onPress: () => void;
 }

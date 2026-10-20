@@ -13,13 +13,7 @@ import AppButton from "../../components/AppButton/appButton";
 import Card from "../../components/Card/card";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
-import { StatusBar } from "expo-status-bar";
-
-type Tarefa = {
-  id: string;
-  titulo: string;
-  concluida: boolean;
-};
+import type { Tarefa } from "../../features/Tarefas/types";
 
 const data = [
   {
@@ -149,6 +143,7 @@ const TarefasScreen = ({ navigation, route }: NavigationProps) => {
               titulo={tarefa.titulo}
               concluida={tarefa.concluida}
               id={tarefa.id}
+              onPress={() => navigation.navigate('Detalhes', { tarefa: tarefa})}
               onDelete={() => {
                 setTarefas(tarefas.filter((t) => t.id !== tarefa.id));
               }}

@@ -2,9 +2,9 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { CardProps } from "./types";
 import Checkbox from "expo-checkbox";
 
-const Card = ({ concluida, titulo, onToggle, onDelete, id }: CardProps) => {
+const Card = ({ concluida, titulo, onToggle, onDelete, onPress}: CardProps) => {
   return (
-    <View
+    <TouchableOpacity
       style={{
         borderWidth: 1,
         borderColor: "black",
@@ -14,6 +14,7 @@ const Card = ({ concluida, titulo, onToggle, onDelete, id }: CardProps) => {
         gap: 10,
         flexDirection: "row",
       }}
+      onPress={onPress}
     >
       <Text
         style={[
@@ -27,7 +28,7 @@ const Card = ({ concluida, titulo, onToggle, onDelete, id }: CardProps) => {
       <TouchableOpacity onPress={onDelete}>
         <Text>Apagar</Text>
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 
