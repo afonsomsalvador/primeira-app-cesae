@@ -15,7 +15,6 @@ const HomeScreen = ({navigation, route}: NavigationProps) => {
 
   return (
     <View style={styles.mainContainer}>
-      <Header titulo="Home" subtitulo="Bem-vindo ao aplicativo" />
       <Text style={{ color: "white", fontSize: 30 }}>
         Olá, <Text style={{ fontWeight: "bold" }}>{nome}</Text>!
       </Text>
