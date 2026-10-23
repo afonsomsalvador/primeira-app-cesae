@@ -6,9 +6,9 @@ import { useState } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
 
-type NavigationProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type NavigationProps = NativeStackScreenProps<RootStackParamList, "Home">;
 
-const HomeScreen = ({navigation, route}: NavigationProps) => {
+const HomeScreen = ({ navigation, route }: NavigationProps) => {
   const nome = "Afonso";
   // const [contador, setContador] = useState<number>(0 as number);
   const [contador, setContador] = useState(0);
@@ -45,7 +45,14 @@ const HomeScreen = ({navigation, route}: NavigationProps) => {
       />
       <Text>{contador}</Text>
       <AppButton title="Click Me" onPress={() => setContador(contador + 1)} />
-        <AppButton title="Ir para tarefas" onPress={() => navigation.navigate('Tarefas')} />
+      <AppButton
+        title="Ir para tarefas"
+        onPress={() => navigation.navigate("Tarefas")}
+      />
+      <AppButton
+        title="Ir para formulário"
+        onPress={() => navigation.navigate("Formulario")}
+      />
     </View>
   );
 };
