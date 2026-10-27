@@ -1,10 +1,11 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, useColorScheme } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import Header from "../../components/Header/header";
+import { Lucide } from "@react-native-vector-icons/lucide";
 import AppButton from "../../components/AppButton/appButton";
 import { useState } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
+import { colorsDark, colorsLight } from "../../theme/theme";
 
 type NavigationProps = NativeStackScreenProps<RootStackParamList, "Home">;
 
@@ -12,6 +13,18 @@ const HomeScreen = ({ navigation, route }: NavigationProps) => {
   const nome = "Afonso";
   // const [contador, setContador] = useState<number>(0 as number);
   const [contador, setContador] = useState(0);
+  const [darkmode, setDarkmode] = useState(false);
+
+  const colors = useColorScheme() === "dark" ? colorsDark : colorsLight;
+
+  const styles = StyleSheet.create({
+    mainContainer: {
+      flex: 1,
+      backgroundColor: colors.primary,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  });
 
   return (
     <View style={styles.mainContainer}>
@@ -39,8 +52,8 @@ const HomeScreen = ({ navigation, route }: NavigationProps) => {
       />
       {/** Imagem local */}
       <Image
-        resizeMode="repeat"
-        style={{ width: 50, height: 150 }}
+        resizeMode="cover"
+        style={{ width: 150, height: 150, aspectRatio: 16 / 9 }}
         source={require("../../../assets/icon.png")}
       />
       <Text>{contador}</Text>
@@ -53,17 +66,9 @@ const HomeScreen = ({ navigation, route }: NavigationProps) => {
         title="Ir para formulário"
         onPress={() => navigation.navigate("Formulario")}
       />
+      <Lucide name="list-filter-plus" size={30} color="#000" />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    backgroundColor: "#45c7cc",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default HomeScreen;

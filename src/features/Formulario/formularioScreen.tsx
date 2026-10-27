@@ -21,7 +21,7 @@ const prioridades = ["Baixa", "Média", "Alta"] as Prioridade[];
 const FormularioScreen = ({ navigation }: NavigationProps) => {
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [prioridade, setPrioridade] = useState<Prioridade>("Alta");
+  const [prioridade, setPrioridade] = useState("Alta" as Prioridade);
 
   const guardar = () => {
     Keyboard.dismiss();
@@ -39,7 +39,9 @@ const FormularioScreen = ({ navigation }: NavigationProps) => {
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ paddingHorizontal: 20, marginTop: 100 }}
       >
-        <View style={{ backgroundColor: "#fff", borderRadius: 15, padding: 15 }}>
+        <View
+          style={{ backgroundColor: "#fff", borderRadius: 15, padding: 15 }}
+        >
           <Text style={{ fontSize: 15, fontWeight: "500", marginBottom: 8 }}>
             Título
           </Text>
@@ -124,9 +126,9 @@ const FormularioScreen = ({ navigation }: NavigationProps) => {
         style={{
           flexDirection: "row",
           gap: 10,
-          paddingHorizontal: 15,
-          paddingTop: 10,
-          paddingBottom: 60,
+          marginHorizontal: 15,
+          marginTop: 10,
+          marginBottom: 60,
         }}
       >
         <TouchableOpacity
