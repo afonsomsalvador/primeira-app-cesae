@@ -3,10 +3,11 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 type HeaderProps = {
   titulo: string;
   subtitulo?: string;
+  visibilityEdit?: boolean;
   goBack?: () => void;
 };
 
-const Header = ({ titulo, subtitulo, goBack }: HeaderProps) => {
+const Header = ({ titulo, subtitulo, goBack, visibilityEdit = true }: HeaderProps) => {
   return (
     <View
       style={{
@@ -34,6 +35,7 @@ const Header = ({ titulo, subtitulo, goBack }: HeaderProps) => {
         />
       </TouchableOpacity>
       <Text style={{ fontSize: 18 }}>{titulo}</Text>
+    {visibilityEdit && (
       <TouchableOpacity
         onPress={goBack}
         style={{
@@ -47,6 +49,7 @@ const Header = ({ titulo, subtitulo, goBack }: HeaderProps) => {
           style={{ width: 20, height: 20 }}
         />
       </TouchableOpacity>
+    )}
     </View>
   );
 };

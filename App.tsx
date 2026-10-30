@@ -5,6 +5,7 @@ import HomeScreen from "./src/features/Home/homeScreen";
 import TarefasScreen from "./src/features/Tarefas/tarefasScreen";
 import DetalheScreen from "./src/features/Detalhes/detalheScreen";
 import FormularioScreen from "./src/features/Formulario/formularioScreen";
+import PerfilScreen from "./src/features/Perfil/perfilScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
 
@@ -19,6 +20,7 @@ export default function App() {
         <Stack.Screen name="Tarefas" component={TarefasScreen} options={{headerShown: false}}/>
         <Stack.Screen name="Detalhes" component={DetalheScreen} options={{headerShown: false}}/>
         <Stack.Screen name="Formulario" component={FormularioScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Perfil" component={PerfilScreen} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

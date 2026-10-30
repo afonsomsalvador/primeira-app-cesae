@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, useColorScheme } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Lucide } from "@react-native-vector-icons/lucide";
 import AppButton from "../../components/AppButton/appButton";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
 import { colorsDark, colorsLight } from "../../theme/theme";
@@ -16,6 +16,12 @@ const HomeScreen = ({ navigation, route }: NavigationProps) => {
   const [darkmode, setDarkmode] = useState(false);
 
   const colors = useColorScheme() === "dark" ? colorsDark : colorsLight;
+
+  useEffect(() => {
+    if (contador === 10) {
+      console.log("HomeScreen mounted");
+    }
+  }, [contador]);
 
   const styles = StyleSheet.create({
     mainContainer: {
@@ -65,6 +71,10 @@ const HomeScreen = ({ navigation, route }: NavigationProps) => {
       <AppButton
         title="Ir para formulário"
         onPress={() => navigation.navigate("Formulario")}
+      />
+      <AppButton
+        title="Ir para perfil"
+        onPress={() => navigation.navigate("Perfil")}
       />
       <Lucide name="list-filter-plus" size={30} color="#000" />
     </View>
